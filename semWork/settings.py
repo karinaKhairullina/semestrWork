@@ -60,6 +60,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'authorization', 'templates'),
             os.path.join(BASE_DIR, 'fashionShows', 'templates'),
             os.path.join(BASE_DIR, 'myClothes', 'templates'),
+            os.path.join(BASE_DIR, 'semWork', 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -129,3 +130,9 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'authorization.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}

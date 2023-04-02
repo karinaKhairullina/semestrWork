@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'register.css' %}">
+</head>
+<body>
+        <img src="https://i.pinimg.com/564x/53/aa/c2/53aac2baa441d5434919580037a03635.jpg" alt="">
+        <div class = "form">
+            <form method="post">
+                {% csrf_token %}
+                <h1>Регистрация</h1>
+                <div class = "input-form">
+                    <input type="text" placeholder="Логин">
+                </div>
+                <div class = "input-form">
+                    <input type="email" placeholder="Email">
+                </div>
+                <div class = "input-form">
+                    <input type="password" placeholder="Пароль">
+                </div>
+                <div class = "input-form">
+                    <input type="submit" value="Зарегестрироваться">
+                </div>
+                <a href="#">Забыли пароль?</a>
+            </form>
+            <div class = "form-buttons">
+                <a href={% url "auth" %}>Войти</a>
+                <h3>или</h3>
+                <a href="#">Войти с помощью Google</a>
+            </div>
+        </div>
+</body>
+</html>
