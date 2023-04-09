@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'fashionShows',
     'myClothes',
     'authorization',
+    'social_django'
 ]
 
 MIDDLEWARE = [
@@ -136,3 +137,18 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '414339005134-fb5hcg0lv8bafukd8ds9vqc5dl6tun3q.apps.googleusercontent.com'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
+LOGIN_URL = '/auth/login/google-oauth2/'
+
+LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/home/'
+LOGOUT_REDIRECT_URL = 'http://127.0.0.1:8000/home/'

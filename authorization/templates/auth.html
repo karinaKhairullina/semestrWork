@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'auth.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-2zYZsOR76JOnO6UfT/bOcEky+0Gvzxym22Lr9zK1EGBJfZwvYbxJ0C8eCDK0lDgcBgLPbBhRLG9rNGjEzZjjBQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     {% if user.is_authenticated %}
@@ -20,10 +19,10 @@
                 <h1>Авторизация</h1>
 				<div class = "input-form">
                 	<div class = "input-form1">
-                    <input type="text" name="username" placeholder="Логин">
+                    <input type="text" name="username" placeholder="Логин" required>
                 </div>
                 <div class = "input-form2">
-                    <input type="password" name="password" placeholder="Пароль">
+                    <input type="password" name="password" placeholder="Пароль" required>
                 </div>
 				</div>
                 <div class = "input-form3">
@@ -34,7 +33,7 @@
             <div class = "form-buttons">
                 <button onclick="location.href='{% url 'register' %}'" class="register-btn">Регистрация</button>
                 <h3>или</h3>
-                <button onclick="location.href='#'" class="google-btn">
+                <button onclick="location.href='{% url 'social:begin' 'google-oauth2' %}'" class="google-btn">
                      <img src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png">
                     Войти с помощью Google
                 </button>

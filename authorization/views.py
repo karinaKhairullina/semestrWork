@@ -12,8 +12,9 @@ class UserRegistrationAPIView(APIView):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return redirect('auth')
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
     def get(self, request):
         return render(request, 'register.html')
@@ -30,8 +31,12 @@ class UserAuthAndLoginAPIView(APIView):
             return redirect('home')
         else:
             messages.error(request, 'Invalid credentials.')
-            return redirect('auth')
+            return render(request,'auth.html')
 
     def get(self, request):
         return render(request, 'auth.html')
+
+
+def google(request):
+    return render(request, 'google.html')
 
