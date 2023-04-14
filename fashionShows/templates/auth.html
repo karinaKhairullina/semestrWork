@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'auth.css' %}">
+</head>
+<body>
+    {% if user.is_authenticated %}
+        <div>
+            <p>Вы уже вошли в свой аккаунт как {{ user.username }}</p>
+            <p>Ваш email: {{ user.email }}</p>
+        </div>
+    {% else %}
+        <img src="https://i.pinimg.com/564x/53/aa/c2/53aac2baa441d5434919580037a03635.jpg" alt="">
+        <div class = "form">
+            <form method="post" action="{% url 'auth' %}">
+                {% csrf_token %}
+                <h1>Авторизация</h1>
+				<div class = "input-form">
+                	<div class = "input-form1">
+                    <input type="text" name="username" placeholder="Логин" required>
+                </div>
+                <div class = "input-form2">
+                    <input type="password" name="password" placeholder="Пароль" required>
+                </div>
+				</div>
+                <div class = "input-form3">
+                    <input type="submit" value="Войти">
+                </div>
+                <a href="#" >Забыли пароль?</a>
+            </form>
+            <div class = "form-buttons">
+                <button onclick="location.href='{% url 'register' %}'" class="register-btn">Регистрация</button>
+                <h3>или</h3>
+                <button onclick="location.href='{% url 'social:begin' 'google-oauth2' %}'" class="google-btn">
+                     <img src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png">
+                    Войти с помощью Google
+                </button>
+            </div>
+        </div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-danger" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+</body>
+</html>

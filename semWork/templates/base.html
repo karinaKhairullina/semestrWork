@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
+</head>
+<body>
+    <div class = "box-area">
+        <header>
+            <div class="wrapper">
+                <div class="logo">
+                    <a href="#">FashLook</a>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Главная</a></li>
+                        <li><a href="#">Гардероб</a>
+                            <ul>
+                                <li><a href="#">Одежда</a></li>
+                                <li><a href="#">Образы</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Модные показы</a></li>
+                        <li> <a href="#">Подписки</a></li>
+                        <li><a href="{% url 'profile' %}">Профиль</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column left">
+                <h5 class="contacts">Контакты для связи</h5>
+                 <p><a href="mailto:karihairullina@gmail.com" title="glorythemes">karihairullina@gmail.com</a></p>
+            </div>
+            <div class="footer-column center">
+                 <h5 class="about">О нас</h5>
+                <p>Цель сайта - помочь людям освоить искусство гармоничного и стильного образа. Сайт предлагает удобный и простой способ организовать свой гардероб, создать уникальный образ и выглядеть на 100%</p>
+            </div>
+            <div class="footer-column right">
+                <h5 class="links">FAQ</h5>
+            <ul>
+                <li><a href="#">Помощь и поддержка</a></li>
+                <li><a href="#">Правила пользования</a></li>
+            </ul>
+            </div>
+        </div>
+    </footer>
+{% block content %}
+{% endblock %}
+    </body>
+</html>

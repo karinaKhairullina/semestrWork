@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', serif;
+    list-style: none;
+    text-decoration: none;
+}
+html,body {
+    background-color: #F2F2F2;
+}
+
+body {
+    font-family: 'Poppins', serif;
+}
+
+.wrapper{
+    width: 90%;
+    margin: 0 auto;
+}
+
+header {
+    width: 100%;
+    height: 100px;
+    background: #B8B6C5;
+    position: fixed;
+    top: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 8%;
+}
+
+.logo{
+    width: 30%;
+    float: left;
+    text-align: left;
+    line-height: 100px;
+}
+
+.logo a{
+    text-decoration: none;
+    font-size: 30px;
+    font-family: 'Pacifico', serif;
+    color: #757575;
+    letter-spacing: 4px;
+}
+
+header nav {
+    width: 70%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+header nav ul li {
+    position: relative;
+    float: left;
+    margin-left: 20px;
+}
+
+
+header nav ul li a{
+    padding: 15px;
+    color: #757575;
+    font-size: 23px;
+    display: block;
+    line-height: 70px;
+}
+
+
+nav ul li:hover > ul{
+    display: initial;
+}
+
+nav ul li ul {
+    position: absolute;
+    left: -15px;
+    width: 150px;
+    background-color: #B8B6C5;
+    display: none;
+    color: #757575;
+}
+
+nav ul li ul li {
+    border-top: 1px solid #757575;
+}
+
+nav ul li ul li:first-child {
+    border-top: none;
+}
+
+footer {
+    background-color: #B8B6C5;
+    padding: 2rem 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-column {
+  width: calc((100% / 3) - 1rem);
+}
+
+.center {
+  text-align: center;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  margin-bottom: 1rem;
+}
+
+h5 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+a {
+  color: #666;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #222;
+}
+

@@ -7,5 +7,6 @@ urlpatterns = [
     path("", include("authorization.urls")),
     path("home/", home_view, name="home"),
     path('', include('social_django.urls', namespace='social')),
+
 ]
 

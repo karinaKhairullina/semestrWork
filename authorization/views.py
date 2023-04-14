@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.contrib.auth.decorators import login_required
 
 
 class UserRegistrationAPIView(APIView):
@@ -31,7 +32,7 @@ class UserAuthAndLoginAPIView(APIView):
             return redirect('home')
         else:
             messages.error(request, 'Invalid credentials.')
-            return render(request,'auth.html')
+            return render(request, 'auth.html')
 
     def get(self, request):
         return render(request, 'auth.html')
@@ -39,4 +40,15 @@ class UserAuthAndLoginAPIView(APIView):
 
 def google(request):
     return render(request, 'google.html')
+
+def profile(request):
+    return render(request, 'profile.html')
+
+
+# только для зарегистрированных пользователей
+@login_required
+def profile(request):
+    user = request.user
+    return render(request, 'profile.html', {'user': user})
+
 

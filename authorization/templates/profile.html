@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="UTF-8">
+      <link rel="stylesheet" href="{% static 'profile.css' %}">
+  </head>
+  <body>
+    <img src="https://i.pinimg.com/564x/f7/0f/bc/f70fbce75bec1cc264b022eda3803b31.jpg" alt="">
+    <div class = "card">
+        <div class="card-header">
+            <h1 class="card-fullname">{{ user.username }}</h1>
+        </div>
+        <div class="card-body">
+            <div class="card-field">
+                <div class="card-field-label">Электронная почта</div>
+                <div class="card-field-value">{{ user.email }}</div>
+            </div>
+            <div class="card-field">
+                <div class="card-field-label">Имя</div>
+                <div class="card-field-value">{{ user.first_name }}</div>
+            </div>
+            <div class="card-field">
+                <div class="card-field-label">Фамилия</div>
+                <div class="card-field-value">{{ user.last_name }}</div>
+            </div>
+        </div>
+        <div class="form-buttons">
+            <button onclick="location.href='{% url 'home' %}'" class="back-btn">Назад</button>
+            <button onclick="location.href='{% url 'home' %}'" class="edit-btn">Изменить данные</button>
+        </div>
+    </div>
+  </body>
+</html>
