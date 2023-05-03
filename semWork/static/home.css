@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+html {
+  height: 100%;
+}
+
+body {
+  position: relative;
+  min-height: 100%;
+}
+
+.first-section {
+  position: relative;
+  height: 100vh;
+}
+
+.full-screen-image {
+  background-image: url('https://avatars.mds.yandex.net/get-images-cbir/1747132/06ReABvAA8EiXyXJeqJ5ZQ1923/ocr');
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: -120px;
+}
+
+.full-screen-image h1 {
+  font-size: 5rem;
+  color: white;
+  text-align: center;
+}
+
+.second-section {
+  position: relative;
+  height: 85vh;
+  display: flex;
+  align-items: center;
+  background-color: black;
+}
+
+.image-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+}
+
+.image-container img:first-child {
+  width: 250px;
+  height: 320px;
+}
+
+.image-container img:last-child {
+  width: 300px;
+  height: 350px;
+  margin-top: 250px;
+  transform: translate(-10%, -10%);
+  z-index: 2;
+}
+
+.second-section-content {
+  width: 50%;
+  margin-left: auto;
+  margin-right: 10%;
+  position: relative;
+  z-index: 1;
+}
+
+.second-section h2 {
+  font-size: 50px;
+  font-family: 'Pacifico', serif;
+  color: white;
+}
+
+.second-section p {
+  font-size: 2rem;
+  color: white;
+}
+
+footer {
+  background-color: white;
+  color: black;
+  padding: 2rem 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+
+  position: absolute;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-column {
+  width: calc((100% / 3) - 1rem);
+}
+
+
+
+
+
+

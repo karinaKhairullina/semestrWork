@@ -7,7 +7,7 @@ body {
   position: absolute;
   width: 45%;
   height: 100%;
-  background: #B8B6C5;
+  background: black;
   right: 0;
   top: 0;
 }
@@ -26,13 +26,14 @@ img {
   top: 10%;
   font-weight: normal;
   font-size: 40px;
+  color: white;
 }
 
 .input-form input {
   padding: 15px;
   width: 250px;
   height: 15px;
-  background-color: #D9D9D9;
+  background-color: white;
 }
 
 .input-form1 {
@@ -97,11 +98,11 @@ a {
   padding: 30px;
   width: 285px;
   height: 30px;
-  background-color: black;
+  background-color: white;
   border: none;
   font-size: 20px;
-  font-weight: normal;
-  color: white;
+  font-weight: bold;
+  color: black;
   margin-top: 30px;
   text-align: center;
   text-decoration: none;

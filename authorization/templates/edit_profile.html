@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'edit_profile.css' %}">
+</head>
+<body>
+    <img src="https://i.pinimg.com/564x/d7/c1/f7/d7c1f781b4d750d04cb8e0bc918976c8.jpg" alt="">
+    <div class = "card">
+        <div class="card-header">
+            <h4>Изменить данные профиля</h4>
+        </div>
+        <div class="form">
+            <form method="POST">
+                {% csrf_token %}
+                <table>
+                    {{ form.as_table }}
+                </table>
+                <div class="form-buttons">
+                    <button onclick="location.href='{% url 'profile' %}'" class="back-btn">Назад</button>
+                    <button type="submit" class="save-btn">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,11 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .serializers import UserSerializer
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.contrib.auth.decorators import login_required
+from .models import User
+from .forms import UserProfileForm
+from .serializers import UserSerializer
 
 
 class UserRegistrationAPIView(APIView):
@@ -45,10 +47,23 @@ def profile(request):
     return render(request, 'profile.html')
 
 
-# только для зарегистрированных пользователей
+# передача данных в профиль html
 @login_required
 def profile(request):
     user = request.user
     return render(request, 'profile.html', {'user': user})
 
+
+# изменение профиля
+@login_required
+def edit_profile(request):
+    user_profile = get_object_or_404(User, username=request.user)  #  username=request.user - возвращает только текущего пользователя
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = UserProfileForm(instance=user_profile)
+    return render(request, 'edit_profile.html', {'form': form})
 

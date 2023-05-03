@@ -7,4 +7,5 @@ urlpatterns = [
     path('auth/', UserAuthAndLoginAPIView.as_view(), name='auth'),
     path('google/', views.google, name='google'),
     path('profile/', views.profile, name='profile'),
+    path('edit_profile/', views.edit_profile, name='edit_profile'),
 ]

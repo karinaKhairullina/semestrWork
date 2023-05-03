@@ -6,7 +6,7 @@
       <link rel="stylesheet" href="{% static 'profile.css' %}">
   </head>
   <body>
-    <img src="https://i.pinimg.com/564x/f7/0f/bc/f70fbce75bec1cc264b022eda3803b31.jpg" alt="">
+    <img src="https://i.pinimg.com/564x/d7/c1/f7/d7c1f781b4d750d04cb8e0bc918976c8.jpg" alt="">
     <div class = "card">
         <div class="card-header">
             <h1 class="card-fullname">{{ user.username }}</h1>
@@ -26,8 +26,9 @@
             </div>
         </div>
         <div class="form-buttons">
-            <button onclick="location.href='{% url 'home' %}'" class="back-btn">Назад</button>
-            <button onclick="location.href='{% url 'home' %}'" class="edit-btn">Изменить данные</button>
+            <button onclick="location.href='{% url 'home' %}'" class="back-btn">На главную</button>
+            <button onclick="location.href='{% url 'edit_profile' %}'" class="edit-btn">Изменить данные</button>
+            <button onclick="location.href='#'" class="edit-btn">Выйти из профиля</button>
         </div>
     </div>
   </body>
