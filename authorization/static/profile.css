@@ -42,7 +42,7 @@ img {
 
 .card-field-value {
   font-size: 20px;
-  margin-bottom: 8px;
+  margin-bottom: 0;
   margin-left: 10px;
   color: #808080;
 }
@@ -52,13 +52,13 @@ img {
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
-  margin-top: 0;
+  margin-top: 10px;
 }
 
 .form-buttons button{
   border: none;
   border-radius: 20px;
-  padding: 10px;
+  padding: 0;
   width: 210px;
   height: 50px;
   font-size: 16px;

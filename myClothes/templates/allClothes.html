@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Мой гардероб</title>
+    <link rel="stylesheet" href="{% static 'allClothes.css' %}">
+</head>
+<body>
+    <button onclick="location.href='{% url 'add_clothes' %}'" class="add-btn">Добавить элемент гардероба</button>
+    <h1>Мой гардероб</h1>
+    {% if clothing_items %}
+        <ul class="category-list">
+            {% regroup clothing_items by category.name as categories %}
+            {% for category in categories %}
+                    <h2>{{ category.grouper }}</h2>
+                    {% regroup category.list by subcategory.name as subcategories %}
+                    {% for subcategory in subcategories %}
+                        <div class="subcategory-container">
+                            <h3>{{ subcategory.grouper }}</h3>
+                            <ul class="image-list">
+                                {% for item in subcategory.list %}
+                                    <li class="image-item">
+                                        <div class="image-container">
+                                            {% for image in item.images.all %}
+                                                <img src="{{ image.image.url }}" alt="{{ item.description }}">
+                                            {% endfor %}
+                                        </div>
+                                        <div class="description-container">
+                                            <a href="{% url 'edit_clothing_item' id=item.id %}">{{ item.description }}</a>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endfor %}
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>У вас пока нет элементов гардероба</p>
+    {% endif %}
+</body>
+</html>
+{% endblock %}

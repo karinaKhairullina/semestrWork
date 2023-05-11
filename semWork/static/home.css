@@ -16,7 +16,6 @@ body {
 }
 
 .full-screen-image {
-  background-image: url('https://avatars.mds.yandex.net/get-images-cbir/1747132/06ReABvAA8EiXyXJeqJ5ZQ1923/ocr');
   background-size: cover;
   background-position: center;
   height: 100%;
@@ -30,7 +29,14 @@ body {
 .full-screen-image h1 {
   font-size: 5rem;
   color: white;
-  text-align: center;
+  text-align: left;
+  position: absolute;
+  top: 50%;
+  left: 7%;
+  transform: translateY(-50%);
+  width: 50%;
+  line-height: 1.2;
+  display: inline-block;
 }
 
 .second-section {
@@ -101,9 +107,3 @@ footer {
 .footer-column {
   width: calc((100% / 3) - 1rem);
 }
-
-
-
-
-
-

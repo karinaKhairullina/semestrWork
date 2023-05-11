@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'addClothes.css' %}">
+</head>
+<body>
+  <div class="background-image"></div>
+  <div class="form-container">
+    <div class="form-right">
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>Добавить новый элемент гардероба</h2>
+        <div class="form-field">
+            {{ form.category.label_tag }}
+            {{ form.category }}
+        </div>
+        <div class="form-field">
+            {{ form.subcategory.label_tag }}
+            {{ form.subcategory }}
+            {% if form.subcategory.errors %}
+                <div class="form-error">{{ form.subcategory.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-field">
+            {{ form.description.label_tag }}
+            {{ form.description }}
+        </div>
+        <div class="form-field">
+            {{ form.image.label_tag }}
+            {{ form.image }}
+        </div>
+        <div class="form-field buttons">
+            <button onclick="location.href='{% url 'all_clothes' %}'">Назад</button>
+            <button type="submit">Сохранить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
+{% endblock %}

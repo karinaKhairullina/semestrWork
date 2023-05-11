@@ -9,13 +9,23 @@ class Category(models.Model):
         return self.name
 
 
+# many to many связь. Модель Image здесь используется для хранения изображений, связанных с конкретной одеждой (ClothingItem
 class Image(models.Model):
     image = models.ImageField(upload_to='clothing_images/')
+
+
+class Subcategory(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
 
 
 class ClothingItem(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE, null=True, blank=True)
     images = models.ManyToManyField(Image)
     description = models.TextField()
 
