@@ -28,7 +28,7 @@
                 <div class = "input-form3">
                     <input type="submit" value="Войти">
                 </div>
-                <a href="#" >Забыли пароль?</a>
+                <a href="{% url 'send_email' %}">Забыли пароль?</a>
             </form>
             <div class = "form-buttons">
                 <button onclick="location.href='{% url 'register' %}'" class="register-btn">Регистрация</button>

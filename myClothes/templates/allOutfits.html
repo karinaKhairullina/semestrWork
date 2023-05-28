@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'allOutfits.css' %}">
+</head>
+<body>
+<h1>Мои образы</h1>
+    <button onclick="location.href='{% url 'create_outfit' %}'" class="add-btn">Создать образ</button>
+    {% if outfits %}
+        <ul>
+{% for outfit in outfits %}
+    <h2>{{ outfit.name }}</h2>
+    <ul>
+        <li class="image-item">
+            <div class="outfit-container">
+                {% for item in outfit.items.all %}
+                    <div class="image-container">
+                        <img src="{{ item.images.first.image.url }}">
+                        <div class="description-container">
+                            <a>{{ item.description }}</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <form method="post" action="{% url 'create_post' %}">
+                {% csrf_token %}
+                <h3>Опубликуйте свой образ</h3>
+                <input type="hidden" name="outfit_id" value="{{ outfit.id }}">
+                <textarea name="text" placeholder="Текст"></textarea>
+                <button type="submit" class='publish'>Опубликовать</button>
+            </form>
+        </li>
+    </ul>
+{% endfor %}
+
+        </ul>
+    {% else %}
+        <p>У вас пока нет созданных образов</p>
+    {% endif %}
+{% endblock %}
+</body>
+</html>

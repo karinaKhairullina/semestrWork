@@ -19,11 +19,11 @@
                         <li><a href="#">Гардероб</a>
                             <ul>
                                 <li><a href="{% url 'all_clothes' %}">Одежда</a></li>
-                                <li><a href="#">Образы</a></li>
+                                <li><a href="{% url 'outfits' %}">Образы</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">Модные показы</a></li>
-                        <li> <a href="#">Подписки</a></li>
+                        <li><a href="{% url 'fashion_news' %}">Новости</a></li>
+                        <li> <a href="{% url 'subscription' %}">Подписки</a></li>
                         <li><a href="{% url 'profile' %}">Профиль</a></li>
                     </ul>
                 </nav>

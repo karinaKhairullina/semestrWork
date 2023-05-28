@@ -31,6 +31,12 @@
             <div class="footer-column left">
                 <h5 class="contacts">Контакты для связи</h5>
                  <p><a href="mailto:karihairullina@gmail.com" title="glorythemes">karihairullina@gmail.com</a></p>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="email" name="email" placeholder="Введите адрес электронной почты">
+                    <button type="submit">Отправить</button>
+                </form>
             </div>
             <div class="footer-column center">
                  <h5 class="about">О нас</h5>
@@ -39,8 +45,8 @@
             <div class="footer-column right">
                 <h5 class="links">FAQ</h5>
             <ul>
-                <li><a href="#">Помощь и поддержка</a></li>
-                <li><a href="#">Правила пользования</a></li>
+                <li><a href="{% url 'Q&A' %}">Помощь и поддержка</a></li>
+                <li><a href="{% url 'termsUse' %}">Правила пользования</a></li>
             </ul>
             </div>
         </div>

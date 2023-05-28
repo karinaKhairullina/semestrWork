@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Form</title>
+</head>
+<body>
+<h1>Форма для введения почты</h1>
+<form method="post" action="{% url 'send_email' %}">
+    {% csrf_token %}
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <br>
+    <input type="submit" value="Отправить">
+    {% if flag %}
+        <p>{{ message }}</p>
+    {% endif %}
+</form>
+</body>
+</html>

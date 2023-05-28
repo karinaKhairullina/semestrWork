@@ -10,6 +10,15 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('username', 'email', 'password', 'first_name', 'last_name')
 
     def create(self, validated_data):
+        """
+        Создает и сохраняет нового пользователя с заданными данными.
+
+        Args(аргументы метода):
+            validated_data (dict): Проверенные данные пользователя.
+
+        Returns(возвращаемое значение):
+            get_user_model(): Созданный пользователь.
+        """
         user = get_user_model().objects.create(
             username=validated_data['username'],
             email=validated_data['email'],

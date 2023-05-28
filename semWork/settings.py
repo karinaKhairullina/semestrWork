@@ -2,6 +2,7 @@
 
 from pathlib import Path
 import os
+from celery.schedules import crontab
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,6 +21,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -31,6 +33,9 @@ INSTALLED_APPS = [
     'fashionShows',
     'myClothes',
     'authorization',
+    'subscribe',
+    'django_celery_beat',
+    'drf_yasg',
     'social_django'
 ]
 
@@ -54,6 +59,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'fashionShows', 'templates'),
             os.path.join(BASE_DIR, 'myClothes', 'templates'),
             os.path.join(BASE_DIR, 'semWork', 'templates'),
+            os.path.join(BASE_DIR, 'subscribe', 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -101,6 +107,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -123,6 +131,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'semWork', 'static'),
     os.path.join(BASE_DIR, 'authorization', 'static'),
     os.path.join(BASE_DIR, 'fashionShows', 'static'),
+    os.path.join(BASE_DIR, 'subscribe', 'static'),
     os.path.join(BASE_DIR, 'myClothes', 'static'),
 ]
 
@@ -152,13 +161,66 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 LOGIN_URL = '/auth/login/google-oauth2/'
 
 LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/home/'
-LOGOUT_REDIRECT_URL = 'http://127.0.0.1:8000/home/'
 
-
-ASGI_APPLICATION = 'semWork.routing.application'
+ASGI_APPLICATION = 'semWork.asgi.application'
 
 CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+        "CONFIG": {}
     },
 }
+
+
+SWAGGER_SETTINGS = {
+    'USE_SESSION_AUTH': False,
+    'JSON_EDITOR': True,
+    'api_version': '1.0',
+    'api_path': '/',
+    'enabled_methods': [
+        'get',
+        'post',
+        'put',
+        'patch',
+        'delete'
+    ],
+    'SECURITY_DEFINITIONS': {
+        'basic': {
+            'type': 'basic'
+        }
+    },
+}
+
+CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672/'
+CELERY_RESULT_BACKEND = 'rpc://'
+BROKER_URL = 'amqp://guest:guest@localhost:5672//'
+
+CELERY_IMPORTS = (
+    'authorization.tasks',
+    'semWork.tasks',
+)
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'karihairullina@gmail.com'
+EMAIL_HOST_PASSWORD = 'apymrqulnxtnpueh'
+DEFAULT_FROM_EMAIL = 'karihairullina@gmail.com'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+CELERY_BEAT_SCHEDULE = {
+    'send-daily-emails': {
+        'task': 'semWork.tasks.send_daily_emails',
+        'schedule': crontab(hour=00, minute=48),
+    },
+}
+
+
+
+
+
+
+
+
+

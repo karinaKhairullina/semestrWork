@@ -5,7 +5,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Мой гардероб</title>
     <link rel="stylesheet" href="{% static 'allClothes.css' %}">
 </head>
 <body>
@@ -15,27 +14,49 @@
         <ul class="category-list">
             {% regroup clothing_items by category.name as categories %}
             {% for category in categories %}
-                    <h2>{{ category.grouper }}</h2>
-                    {% regroup category.list by subcategory.name as subcategories %}
-                    {% for subcategory in subcategories %}
-                        <div class="subcategory-container">
-                            <h3>{{ subcategory.grouper }}</h3>
-                            <ul class="image-list">
-                                {% for item in subcategory.list %}
-                                    <li class="image-item">
-                                        <div class="image-container">
-                                            {% for image in item.images.all %}
-                                                <img src="{{ image.image.url }}" alt="{{ item.description }}">
-                                            {% endfor %}
-                                        </div>
-                                        <div class="description-container">
-                                            <a href="{% url 'edit_clothing_item' id=item.id %}">{{ item.description }}</a>
-                                        </div>
-                                    </li>
+                <h2>{{ category.grouper }}</h2>
+                {% regroup category.list by subcategory.name as subcategories %}
+                {% for subcategory in subcategories %}
+                    <div class="subcategory-container">
+                        <h3>{{ subcategory.grouper }}</h3>
+                        <ul class="image-list">
+                            {% for item in subcategory.list %}
+                                <li class="image-item">
+                                    <div class="image-container">
+                                        {% for image in item.images.all %}
+                                            <img src="{{ image.image.url }}" alt="{{ item.description }}">
+                                        {% endfor %}
+                                    </div>
+                                    <div class="description-container">
+                                        <a href="{% url 'edit_clothing_item' id=item.id %}">{{ item.description }}</a>
+                                    </div>
+                                </li>
+                                <form action="{% url 'delete_clothing_item' id=item.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="delete-btn">Удалить</button>
+                                </form>
+                            {% endfor %}
+                        </ul>
+                        <h3>Рекомендации:</h3>
+                            <ul class="recommendation-list">
+                                {% for recommendation in recommendations %}
+                                    {% if recommendation.category.name == category.grouper and recommendation.subcategory.name == subcategory.grouper %}
+                                        <li class="recommendation-item">
+                                            <div class="recommendation-image-container">
+                                                <img src="{{ recommendation.image.url }}" alt="{{ recommendation.description }}">
+                                            </div>
+                                            <div class="recommendation-description-container">
+                                                <a>{{ recommendation.description }}</a>
+                                            </div>
+                                            <div class="recommendation-link-container">
+                                                <a href="{{ recommendation.purchase_link }}">Купить</a>
+                                            </div>
+                                        </li>
+                                    {% endif %}
                                 {% endfor %}
                             </ul>
-                        </div>
-                    {% endfor %}
+                    </div>
+                {% endfor %}
             {% endfor %}
         </ul>
     {% else %}

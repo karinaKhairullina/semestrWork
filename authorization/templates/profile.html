@@ -28,7 +28,7 @@
         <div class="form-buttons">
             <button onclick="location.href='{% url 'home' %}'" class="back-btn">На главную</button>
             <button onclick="location.href='{% url 'edit_profile' %}'" class="edit-btn">Изменить данные</button>
-            <button onclick="location.href='#'" class="edit-btn">Выйти из профиля</button>
+            <button onclick="location.href='{% url 'logout' %}'" class="logout-btn">Выйти из профиля</button>
         </div>
     </div>
   </body>

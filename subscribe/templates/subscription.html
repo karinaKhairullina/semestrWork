@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'subscription.css' %}">
+</head>
+<body>
+    <form method="post" action="{% url 'subscription' %}">
+        {% csrf_token %}
+        <div class="search-wrapper">
+            {{ search_form.as_p }}
+            <button type="submit">Найти</button>
+        </div>
+    </form>
+
+    {% if search_results %}
+    <ul>
+        {% for user in search_results %}
+            <li>{{ user.username }}</li>
+            <a href="{% url 'subscribe' user.id %}">Подписаться</a>
+        {% empty %}
+            <li>Ничего не найдено</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% for post in posts %}
+        <div class="post">
+            <h3>{{ post.user.username }}</h3>
+            <p>{{ post.text }}</p>
+            <div class="images">
+                {% for image in post.images.all %}
+                    <img class="image" src="{{ image.image.url }}" alt="Image">
+                {% endfor %}
+            </div>
+            <a class="like-button" href="{% url 'like_post' post.id %}">&#x2665; {{ post.likes.count }}</a>
+            <form method="post" action="{% url 'subscription' %}">
+                {% csrf_token %}
+                {{ comment_form.as_p }}
+                <input type="hidden" name="post_id" value="{{ post.id }}">
+                <input class="comment-button" type="submit" value="Отправить комментарий">
+            </form>
+            <ul class="comment-list">
+                {% for comment in post.comments.all %}
+                    <li>
+                        {{ comment.user.username }}: {{ comment.text }}
+                        <span class="comment-time">{{ comment.create_date }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% empty %}
+        <p>Постов пока нет</p>
+    {% endfor %}
+</body>
+</html>
+{% endblock %}

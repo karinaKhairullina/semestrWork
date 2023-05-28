@@ -9,6 +9,17 @@ from django.contrib.auth.models import (
 
 class UserManager(BaseUserManager):
     def create_user(self, username, email, password=None):
+        """
+        Создает и сохраняет обычного пользователя с заданными данными.
+
+        Args:
+            username (str): Имя пользователя.
+            email (str): Адрес электронной почты пользователя.
+            password (str, optional): Пароль пользователя. Defaults to None.
+
+        Returns:
+            User: Созданный пользователь.
+        """
         if not email:
             raise ValueError('Email is required')
         if not username:
@@ -23,6 +34,17 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, username, email, password):
+        """
+        Создает и сохраняет суперпользователя с заданными данными.
+
+        Args:
+            username (str): Имя пользователя.
+            email (str): Адрес электронной почты пользователя.
+            password (str): Пароль пользователя.
+
+        Returns:
+            User: Созданный суперпользователь.
+        """
         user = self.create_user(username, email, password)
         user.is_superuser = True
         user.is_staff = True
@@ -37,6 +59,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=30, blank=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    subscriptions = models.ManyToManyField('self', blank=True, related_name='subscribers', symmetrical=False)
 
     objects = UserManager()
 
@@ -45,15 +68,39 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     @property
     def token(self):
+        """
+        Возвращает JWT-токен пользователя.
+
+        Returns:
+            str: JWT-токен пользователя.
+        """
         return self._generate_jwt_token()
 
     def get_full_name(self):
+        """
+        Возвращает полное имя пользователя.
+
+        Returns:
+            str: Полное имя пользователя.
+        """
         return self.username
 
     def get_short_name(self):
+        """
+        Возвращает сокращенное имя пользователя.
+
+        Returns:
+            str: Сокращенное имя пользователя.
+        """
         return self.username
 
     def _generate_jwt_token(self):
+        """
+        Генерирует JWT-токен для пользователя.
+
+        Returns:
+            str: Сгенерированный JWT-токен.
+        """
         dt = datetime.now() + timedelta(days=1)
 
         token = jwt.encode({
